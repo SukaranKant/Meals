@@ -4,13 +4,13 @@ import '../models/meal.dart';
 import '../screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
-  
   final String id;
   final String title;
   final String imageUrl;
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   const MealItem({
     @required this.id,
@@ -19,13 +19,21 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.complexity,
     @required this.affordability,
+    @required this.removeItem,
   });
 
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(
+    Navigator.of(ctx)
+        .pushNamed(
       MealDetailScreen.routeName,
       arguments: id,
-    );
+    )
+        .then((result) {
+      if (result != null) {
+        // executed when the meal detail screen is popped.
+        removeItem(result);
+      }
+    });
   }
 
   String get complexityText {
@@ -53,8 +61,6 @@ class MealItem extends StatelessWidget {
         return 'Unknown';
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
