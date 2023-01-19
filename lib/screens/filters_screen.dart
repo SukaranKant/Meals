@@ -53,7 +53,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         title: Text('Your Filters'),
         actions: [
           IconButton(
-            onPressed: (){
+            onPressed: () {
               final selectedFilters = {
                 'gluten': _glutenFree,
                 'lactose': _lactoseFree,
